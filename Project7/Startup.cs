@@ -52,6 +52,22 @@ namespace Project7
 
             app.UseEndpoints(endpoints =>
             {
+            // creates a new endpoint to update the information in the URL
+            // endpoints are executed in order 
+                endpoints.MapControllerRoute("categorypage", 
+                    "{Category}/Page{pageNum}",
+                    new { Controller = "Home", action = "Index" });
+
+                endpoints.MapControllerRoute(
+                    // name, pattern, and default names aren't necessary
+                    name: "Paging",
+                    pattern: "Page{pageNum}",
+                    defaults: new { Controller = "Home", action = "Index", pageNum = 1 });
+
+                endpoints.MapControllerRoute("type",
+                   "{Category}",
+                   new { Controller = "Home", action = "Index", pageNum = 1 });
+
                 endpoints.MapDefaultControllerRoute();
             });
         }

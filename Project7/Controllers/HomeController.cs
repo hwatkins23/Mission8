@@ -16,20 +16,24 @@ namespace Project7.Controllers
         {
             repo = temp;
         }
-        public IActionResult Index(int pageNum = 1)
+        public IActionResult Index(string Category, int pageNum = 1)
         {
             int pageSize = 10;
 
             var yeet = new BooksViewModel
             {
                 Books = repo.Books
+                .Where(b => b.Category == Category || Category == null)
                 .OrderBy(b => b.Title)
                 .Skip((pageNum - 1) * pageSize)
                 .Take(pageSize),
 
                 PageInfo = new PageInfo
                 {
-                    totalNumBooks = repo.Books.Count(),
+                    totalNumBooks = (Category == null
+                    ? repo.Books.Count()
+                    : repo.Books.Where(x => x.Category == Category).Count()),
+
                     booksPerPage = pageSize,
                     currentPage = pageNum
                 }

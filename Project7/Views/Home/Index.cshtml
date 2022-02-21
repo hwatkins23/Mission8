@@ -1,29 +1,11 @@
-﻿@{
-}
-@model BooksViewModel
+﻿@{ }
 <!--Hannah Watkins-->
-<div class="text-center">
-    <!--header-->
-    <h1>Welcome to the Bookstore!</h1>
-</div>
-<div class="text-center">
+@model BooksViewModel
+<div>
     <!--for loop that takes the list of books and outputs all the info-->
     @foreach (Book b in Model.Books)
-    {
-        <h3 class="text-center">@b.Title</h3>
-
-        <ul>
-            <ul>Author: @b.Author</ul>
-            <ul>Publisher: @b.Publisher</ul>
-            <ul>ISBN: @b.Isbn</ul>
-            <ul>Classification/Category: @b.Classification</ul>
-            <ul>Number of Pages: @b.PageCount</ul>
-            <ul>Price: $@b.Price</ul>
-        </ul>
-
-        <br />
-
-    }
+    {<!--this links to the partial view ProjectSummary shared view-->
+                <partial name="ProjectSummary" model="b" />}
 
 </div>
 <!--tag helper takes what you've given and dynamically builds it into html-->
