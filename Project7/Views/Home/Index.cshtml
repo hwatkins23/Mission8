@@ -1,0 +1,33 @@
+﻿@{
+}
+@model BooksViewModel
+<!--Hannah Watkins-->
+<div class="text-center">
+    <!--header-->
+    <h1>Welcome to the Bookstore!</h1>
+</div>
+<div class="text-center">
+    <!--for loop that takes the list of books and outputs all the info-->
+    @foreach (Book b in Model.Books)
+    {
+        <h3 class="text-center">@b.Title</h3>
+
+        <ul>
+            <ul>Author: @b.Author</ul>
+            <ul>Publisher: @b.Publisher</ul>
+            <ul>ISBN: @b.Isbn</ul>
+            <ul>Classification/Category: @b.Classification</ul>
+            <ul>Number of Pages: @b.PageCount</ul>
+            <ul>Price: $@b.Price</ul>
+        </ul>
+
+        <br />
+
+    }
+
+</div>
+<!--tag helper takes what you've given and dynamically builds it into html-->
+
+<div page-model="@Model.PageInfo" page-action="Index" page-classes-enabled="true"
+     page-class="btn" page-class-normal="btn-outline-dark"
+     page-class-selected="btn-primary" class="btn-group pull-right m-1"></div>
