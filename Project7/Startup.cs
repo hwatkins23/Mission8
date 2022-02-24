@@ -36,7 +36,12 @@ namespace Project7
 
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
 
+            // allows us to add razor pages
             services.AddRazorPages();
+
+            // used to create a session
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,7 +54,8 @@ namespace Project7
 
             // corresponds to wwwroot folder 
             app.UseStaticFiles();
-
+            app.UseSession();
+            // sessions can store an int, string, or byte 
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
