@@ -1,0 +1,15 @@
+﻿@{
+}
+
+@model IEnumerable<string>
+<div class="d-grid gap-2">
+    <a asp-controller="Home" asp-action="Index" asp-route-Category="" asp-route-pageNum ="1" class="btn btn-outline-secondary">Home</a>
+
+    <!--loop through the list of category names -->
+    @foreach (string c in Model)
+    {
+        <!--this acts like an if else statement to determine the button-->
+        <a asp-controller="Home" asp-action="Index" asp-route-Category="@c" asp-route-pageNum ="1"
+           class="btn @(ViewBag.SelectedCategory == c ? "btn-primary" : "btn-outline-secondary")">@c</a>
+    }
+</div>
