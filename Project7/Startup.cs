@@ -35,6 +35,7 @@ namespace Project7
            });
 
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
+            services.AddScoped<IOrderRepository, EFOrderRepository>();
 
             // allows us to add razor pages
             services.AddRazorPages();
@@ -42,6 +43,10 @@ namespace Project7
             // used to create a session
             services.AddDistributedMemoryCache();
             services.AddSession();
+
+            services.AddScoped<Basket>(x => SessionBasket.GetBasket(x));
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>(); 
+                // this (IHttpContextAccessor) is also in the SessionBakset
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

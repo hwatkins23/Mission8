@@ -12,9 +12,11 @@ namespace Project7.Pages
     public class CartModel : PageModel
     {
         private IBookstoreRepository repo { get; set; }
-        public CartModel (IBookstoreRepository temp)
+
+        public CartModel (IBookstoreRepository temp, Basket b)
         {
             repo = temp;
+            basket = b;
         }
 
         public Basket basket { get; set; }
@@ -23,21 +25,20 @@ namespace Project7.Pages
         public void OnGet(string returnUrl)
         {
             ReturnUrl = returnUrl ?? "/";
-            basket = HttpContext.Session.GetJson<Basket>("basket") ?? new Basket();
         }
 
         public IActionResult OnPost(int bookID, string returnUrl)
         {
             Book b = repo.Books.FirstOrDefault(x => x.BookId == bookID);
 
-            // check to see if the basket exists and if it does then use it, if not create a new basket and add to that
-            basket = HttpContext.Session.GetJson<Basket>("basket") ?? new Basket();
             basket.AddItem(b, 1);
 
-            // set json file based on new basket
-            HttpContext.Session.SetJson("basket", basket);
-
             return RedirectToPage(new { ReturnUrl = returnUrl });
+        }
+        public IActionResult OnPostRemove(int bookId, string returnUrl)
+        {
+            basket.RemoveItem(basket.Items.First(x => x.Book.BookId == bookId).Book);
+            return RedirectToPage ( new { ReturnUrl = returnUrl });
         }
     }
 }

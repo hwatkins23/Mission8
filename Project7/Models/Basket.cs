@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,7 +10,8 @@ namespace Project7.Models
     {
         public List<BasketLineItem> Items { get; set; } = new List<BasketLineItem>();
 
-        public void AddItem (Book Book, int qty)
+        // virtual allows the method to be overriden when you inherit from it
+        public virtual void AddItem (Book Book, int qty)
         {
             BasketLineItem line = Items
                 .Where(b => b.Book.BookId == Book.BookId)
@@ -27,6 +29,18 @@ namespace Project7.Models
                 line.Quantity += qty;
             }
         }
+
+        public virtual void RemoveItem (Book Book)
+        {
+            Items.RemoveAll(x => x.Book.BookId == Book.BookId);
+        }
+
+        public virtual void ClearBasket ()
+        {
+            // this will get rid of everything in the cart
+            Items.Clear();
+        }
+
         public double CalculateTotal()
         {
             // calculates the total in the cart
@@ -35,10 +49,9 @@ namespace Project7.Models
         }
     }
 
-  
-
     public class BasketLineItem
     {
+        [Key]
         public int LineID { get; set; }
         public Book Book { get; set; }
         public int Quantity { get; set; }
