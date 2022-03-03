@@ -24,7 +24,7 @@ namespace Project7.Controllers
             return View(new Order());
         }
         [HttpPost]
-        public IActionResult PlaceOrder(Order checkout)
+        public IActionResult PlaceOrder(Order check)
         {
             if (basket.Items.Count() == 0)
             {
@@ -32,8 +32,8 @@ namespace Project7.Controllers
             }
             if (ModelState.IsValid)
             {
-                checkout.Lines = basket.Items.ToArray();
-                repo.SaveOrder(checkout);
+                check.Lines = basket.Items.ToArray();
+                repo.SaveOrder(check);
                 basket.ClearBasket();
 
                 return RedirectToPage("/Completed");
