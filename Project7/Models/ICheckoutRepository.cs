@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Project7.Models
 {
-    public interface IOrderRepository
+    public interface ICheckoutRepository
     {
-        IQueryable<Order> Checkout { get; }
-        public void SaveOrder(Order Checkout);
+        IQueryable<Checkout> Checkout { get; }
+        public void SaveOrder(Checkout Checkout);
     }
 }

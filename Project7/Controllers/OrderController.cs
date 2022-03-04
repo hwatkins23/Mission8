@@ -9,10 +9,10 @@ namespace Project7.Controllers
 {
     public class OrderController : Controller
     {
-        private IOrderRepository repo { get; set; }
+        private ICheckoutRepository repo { get; set; }
         private Basket basket { get; set; }
 
-        public OrderController(IOrderRepository temp, Basket b)
+        public OrderController(ICheckoutRepository temp, Basket b)
         {
             repo = temp;
             basket = b;
@@ -21,10 +21,10 @@ namespace Project7.Controllers
         [HttpGet]
         public IActionResult PlaceOrder()
         {
-            return View(new Order());
+            return View(new Checkout());
         }
         [HttpPost]
-        public IActionResult PlaceOrder(Order check)
+        public IActionResult PlaceOrder(Checkout check)
         {
             if (basket.Items.Count() == 0)
             {

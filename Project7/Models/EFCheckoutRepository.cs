@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace Project7.Models
 {
-    public class EFOrderRepository : IOrderRepository
+    public class EFCheckoutRepository : ICheckoutRepository
     {
         private BookstoreContext context;
-        public EFOrderRepository (BookstoreContext temp)
+        public EFCheckoutRepository (BookstoreContext temp)
         {
             context = temp;
         }
-        public IQueryable<Order> Checkout => context.Checkout.Include(x => x.Lines).ThenInclude(x => x.Book);
+        public IQueryable<Checkout> Checkout => context.Checkout.Include(x => x.Lines).ThenInclude(x => x.Book);
 
-        public void SaveOrder(Order Checkout)
+        public void SaveOrder(Checkout Checkout)
         {
             context.AttachRange(Checkout.Lines.Select(x => x.Book));
             if (Checkout.CheckoutId == 0)

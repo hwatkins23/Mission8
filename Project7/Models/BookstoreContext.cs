@@ -20,7 +20,7 @@ namespace Project7.Models
         }
 
         public DbSet<Book> Books { get; set; }
-        public DbSet<Order> Checkout { get; set; }
+        public DbSet<Checkout> Checkout { get; set; }
 
     }
 }

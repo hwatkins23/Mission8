@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Project7.Models
 {
-    public class Order
+    public class Checkout
     { 
         [Key]
         [BindNever]
@@ -29,6 +29,6 @@ namespace Project7.Models
         public string Zip { get; set; }
         [Required(ErrorMessage ="Please enter the country: ")]
         public string Country { get; set; }
-        public object Items { get; internal set; }
+        // public object Items { get; internal set; }
     }
 }

@@ -35,7 +35,7 @@ namespace Project7
            });
 
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
-            services.AddScoped<IOrderRepository, EFOrderRepository>();
+            services.AddScoped<ICheckoutRepository, EFCheckoutRepository>();
 
             // allows us to add razor pages
             services.AddRazorPages();
