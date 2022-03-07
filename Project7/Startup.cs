@@ -45,8 +45,11 @@ namespace Project7
             services.AddSession();
 
             services.AddScoped<Basket>(x => SessionBasket.GetBasket(x));
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>(); 
-                // this (IHttpContextAccessor) is also in the SessionBakset
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            // this (IHttpContextAccessor) is also in the SessionBakset
+
+            services.AddServerSideBlazor();
+            // sets up blazor
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,6 +87,10 @@ namespace Project7
                 endpoints.MapDefaultControllerRoute();
 
                 endpoints.MapRazorPages();
+
+                endpoints.MapBlazorHub();
+                endpoints.MapFallbackToPage("admin/(*catchall)", "/Admin/Index");
+                // sets up mapping for blazor
             });
         }
     }
