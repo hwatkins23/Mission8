@@ -1,7 +1,37 @@
 ﻿@page "/admin/cart" 
+@inherits OwningComponentBase<ICheckoutRepository>
 
-<h3>Cart</h3>
+<OrderTable TableTitle ="Unsubmitted Orders" Checkout="UnsubmittedOrders"
+            ButtonLabel="Shipped" OrderSelected="SubmitOrder"></OrderTable>
 
-@code {
+<OrderTable TableTitle="Submitted Orders" Checkout="SubmittedOrders"
+            ButtonLabel="Reset" OrderSelected="ResetOrder"></OrderTable>
 
+<button class="btn btn-info" @onclick="@(x => UpdateData())">Refresh Data</button>
+
+@code{
+    public ICheckoutRepository repo => Service;
+
+    public IEnumerable<Checkout> AllOrders { get; set; }
+    public IEnumerable<Checkout> UnsubmittedOrders { get; set; }
+    public IEnumerable<Checkout> SubmittedOrders { get; set; }
+
+    protected async override Task OnInitializedAsync()
+    {
+        await UpdateData();
+    }
+    public async Task UpdateData()
+    {
+        AllOrders = await repo.Checkout.ToListAsync();
+        UnsubmittedOrders = AllOrders.Where(x => !x.OrderReceived);
+        SubmittedOrders = AllOrders.Where(x => x.OrderReceived);
+    }
+    public void SubmitOrder(int id) => UpdateOrder(id, true);
+    public void ResetOrder(int id) => UpdateOrder(id, false);
+    private void UpdateOrder(int id, bool shipped)
+    {
+        Checkout c = repo.Checkout.FirstOrDefault(x => x.CheckoutId ==id);
+        c.OrderReceived = shipped;
+        repo.SaveOrder(c);
+    }
 }

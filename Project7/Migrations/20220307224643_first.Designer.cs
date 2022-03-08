@@ -9,8 +9,8 @@ using Project7.Models;
 namespace Project7.Migrations
 {
     [DbContext(typeof(BookstoreContext))]
-    [Migration("20220307205003_update")]
-    partial class update
+    [Migration("20220307224643_first")]
+    partial class first
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

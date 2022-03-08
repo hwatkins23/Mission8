@@ -89,7 +89,7 @@ namespace Project7
                 endpoints.MapRazorPages();
 
                 endpoints.MapBlazorHub();
-                endpoints.MapFallbackToPage("admin/(*catchall)", "/Admin/Index");
+                endpoints.MapFallbackToPage("/admin/{*catchall}", "/Admin/Index");
                 // sets up mapping for blazor
             });
         }

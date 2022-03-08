@@ -2,7 +2,7 @@
 
 namespace Project7.Migrations
 {
-    public partial class update : Migration
+    public partial class first : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -98,4 +98,5 @@ namespace Project7.Migrations
                 name: "Checkout");
         }
     }
+    
 }
