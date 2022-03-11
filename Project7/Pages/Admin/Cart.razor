@@ -1,6 +1,7 @@
 ﻿@page "/admin/cart" 
 @inherits OwningComponentBase<ICheckoutRepository>
 
+
 <OrderTable TableTitle ="Unsubmitted Orders" Checkout="UnsubmittedOrders"
             ButtonLabel="Shipped" OrderSelected="SubmitOrder"></OrderTable>
 
@@ -28,7 +29,8 @@
     }
     public void SubmitOrder(int id) => UpdateOrder(id, true);
     public void ResetOrder(int id) => UpdateOrder(id, false);
-    private void UpdateOrder(int id, bool shipped)
+
+    public void UpdateOrder(int id, bool shipped)
     {
         Checkout c = repo.Checkout.FirstOrDefault(x => x.CheckoutId ==id);
         c.OrderReceived = shipped;

@@ -47,7 +47,7 @@ namespace Project7.Models
         public override void ClearBasket()
         {
             base.ClearBasket();
-            Session.SetJson("Basket", this);
+            Session.Remove("Basket");
         }
     }
 }
