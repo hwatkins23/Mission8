@@ -2,20 +2,20 @@
 @page "/admin"
 @inherits OwningComponentBase<IBookstoreRepository>
 
-<table class="table table-sm table-striped table-bordered">
-
-    <thead>
+<table class="table table-sm table-striped table-bordered table-responsive">
+    <!--added a dark header and a light table body-->
+    <thead  class="table-dark">
         <tr>
             <th>Book ID</th>
             <th>Book Title</th>
         </tr>
     </thead>
 
-    <tbody>
+    <tbody class="table-light">
 
         @if (BookData?.Count() > 0)
             {
-                // list the projects
+                // list the books
                 @foreach (Book b in BookData)
                 {
                     <tr>
@@ -31,7 +31,7 @@
             }
          else
             {
-                // 
+                // if no books
                 <tr>
                     <td colspan="5" class="text-center">No Books</td>
                 </tr>
