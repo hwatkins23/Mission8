@@ -14,18 +14,25 @@
         </span>
     </div>
     <ul>
-        <li>Author: @Model.Author</li>
+        <!--added list group item dark to create stripes on the list of book details-->
+        <div class="list-group-item-dark">
+            <li>Author: @Model.Author</li>
+        </div>
         <li>Publisher: @Model.Publisher</li>
-        <li>Category: @Model.Category</li>
+        <div class="list-group-item-dark">
+            <li>Category: @Model.Category</li>
+        </div>
         <li>Classification: @Model.Classification</li>
-        <li>ISBN: @Model.Isbn</li>
+        <div class="list-group-item-dark">
+            <li>ISBN: @Model.Isbn</li>
+        </div>
         <li>Number of Pages: @Model.PageCount</li>
     </ul>
 
     <form method="post" asp-page="/Cart">
 
-        <input type="hidden" asp-for="@Model.BookId"/>
-        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()"/>
+        <input type="hidden" asp-for="@Model.BookId" />
+        <input type="hidden" name="returnUrl" value="@ViewContext.HttpContext.Request.PathAndQuery()" />
 
         <span class="card-text">
             <button type="submit" class="btn btn-success btn-sm float-end">Add to Cart</button>

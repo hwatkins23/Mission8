@@ -2,8 +2,8 @@
 @page "/admin"
 @inherits OwningComponentBase<IBookstoreRepository>
 
-<table class="table table-sm table-striped table-bordered table-responsive">
-    <!--added a dark header and a light table body-->
+<table class="table table-sm table-striped table-bordered table-responsive table-dark">
+    <!--made the whole table dark-->
     <thead  class="table-dark">
         <tr>
             <th>Book ID</th>
@@ -11,7 +11,7 @@
         </tr>
     </thead>
 
-    <tbody class="table-light">
+    <tbody>
 
         @if (BookData?.Count() > 0)
             {

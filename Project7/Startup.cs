@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,6 +35,13 @@ namespace Project7
            options.UseSqlite(Configuration["ConnectionStrings:BookDBConnection"]);
            });
 
+            // used to add/connect the db context
+            services.AddDbContext<AppIdentityDBContext>( options => 
+                options.UseSqlite(Configuration["ConnectionStrings:IdentityConnection"]));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDBContext>();
+
             services.AddScoped<IBookstoreRepository, EFBookstoreRepository>();
             services.AddScoped<ICheckoutRepository, EFCheckoutRepository>();
 
@@ -66,6 +74,9 @@ namespace Project7
             // sessions can store an int, string, or byte 
             app.UseRouting();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
             // creates a new endpoint to update the information in the URL
@@ -91,7 +102,9 @@ namespace Project7
                 endpoints.MapBlazorHub();
                 endpoints.MapFallbackToPage("/admin/{*catchall}", "/Admin/Index");
                 // sets up mapping for blazor
+                IdentitySeedData.EnsurePopulated(app);
             });
+
         }
     }
 }
